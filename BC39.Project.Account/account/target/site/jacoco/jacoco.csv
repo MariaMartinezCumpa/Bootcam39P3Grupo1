@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+account,com.bootcamp.project.account.service,AccountServiceImplementation,703,15,44,0,103,4,69,3,47,3
+account,com.bootcamp.project.account.controller,AccountController,132,3,0,0,24,1,24,1,24,1
+account,com.bootcamp.project.account.entity,Person,126,0,22,0,3,0,20,0,9,0
+account,com.bootcamp.project.account.entity,AccountEntity,886,15,120,0,22,2,104,4,44,4
+account,com.bootcamp.project.account.exception,CustomInformationException,4,0,0,0,2,0,1,0,1,0
+account,com.bootcamp.project.account.exception,CustomNotFoundException,4,0,0,0,2,0,1,0,1,0
+account,com.bootcamp.project.account,AccountApplication,5,3,0,0,2,1,1,1,1,1

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">account</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.project.account.controller</a> &gt; <span class="el_source">AccountController.java</span></div><h1>AccountController.java</h1><pre class="source lang-java linenums">package com.bootcamp.project.account.controller;
+
+import com.bootcamp.project.account.entity.AccountEntity;
+import com.bootcamp.project.account.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.Date;
+
+@RestController
+@RequestMapping(value=&quot;/Account&quot;)
+<span class="fc" id="L15">public class AccountController {</span>
+    @Autowired
+    AccountService accountService;
+
+    @GetMapping(value = &quot;/FindOne/{accountNumber}&quot;)
+    public Mono&lt;AccountEntity&gt; Get_One(@PathVariable(&quot;accountNumber&quot;) String accountNumber){
+<span class="nc" id="L21">        return accountService.getOne(accountNumber);</span>
+    }
+    @GetMapping(value = &quot;/FindAll&quot;)
+    public Flux&lt;AccountEntity&gt; Get_All(){
+
+<span class="nc" id="L26">        return accountService.getAll();</span>
+    }
+    @PostMapping(value = &quot;/Save&quot;)
+    public Mono&lt;AccountEntity&gt; Save(@RequestBody AccountEntity col){
+
+<span class="nc" id="L31">        return accountService.save(col);</span>
+    }
+    @PutMapping(value = &quot;/Update/{accountNumber}/{balance}&quot;)
+    public Mono&lt;AccountEntity&gt; Update(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;type&quot;) double balance){
+<span class="nc" id="L35">        return accountService.update(accountNumber, balance);</span>
+    }
+    @DeleteMapping  (value = &quot;/Delete/{accountNumber}&quot;)
+    public Mono&lt;Void&gt; Delete(@PathVariable(&quot;accountNumber&quot;) String accountNumber){
+<span class="nc" id="L39">        return accountService.delete(accountNumber);</span>
+    }
+
+    @GetMapping(value = &quot;/GetByClientAndProduct/{clientDocumentNumber}/{productCode}&quot;)
+    public Mono&lt;AccountEntity&gt; getByClientAndProduct(@PathVariable(&quot;clientDocumentNumber&quot;) String clientDocumentNumber,@PathVariable(&quot;productCode&quot;) String productCode){
+<span class="nc" id="L44">        return accountService.getByClientAndProduct(clientDocumentNumber,productCode);</span>
+    }
+    @GetMapping(value = &quot;/GetBalance/{accountNumber}&quot;)
+    public Mono&lt;Double&gt; getBalance(@PathVariable(&quot;accountNumber&quot;) String accountNumber){
+<span class="nc" id="L48">        return accountService.getBalance(accountNumber);</span>
+    }
+    @PutMapping(value = &quot;/DepositBalance/{accountNumber}/{balance}&quot;)
+    public Mono&lt;AccountEntity&gt; depositBalance(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;balance&quot;) double balance){
+<span class="nc" id="L52">        return accountService.depositBalance(accountNumber,balance);</span>
+    }
+    @PutMapping(value = &quot;/WithdrawBalance/{accountNumber}/{balance}&quot;)
+    public Mono&lt;AccountEntity&gt; withdrawBalance(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;balance&quot;) double balance){
+<span class="nc" id="L56">        return accountService.withdrawBalance(accountNumber,balance);</span>
+    }
+    @PutMapping(value = &quot;/ApplyMaintenanceFee/{accountNumber}&quot;)
+    public Mono&lt;AccountEntity&gt; applyMaintenanceFee(@PathVariable(&quot;accountNumber&quot;) String accountNumber){
+<span class="nc" id="L60">        return accountService.applyMaintenanceFee(accountNumber);</span>
+    }
+    @PostMapping(value = &quot;/RegisterPersonal&quot;)
+    public Mono&lt;AccountEntity&gt; registerPersonalAccount(@RequestBody AccountEntity col){
+<span class="nc" id="L64">        return accountService.registerPersonalAccount(col);</span>
+    }
+    @PostMapping(value = &quot;/RegisterCompany&quot;)
+    public Mono&lt;AccountEntity&gt; registerCompanyAccount(@RequestBody AccountEntity col){
+<span class="nc" id="L68">        return accountService.registerCompanyAccount(col);</span>
+    }
+    @PutMapping(value = &quot;/TransferBalance/{sourceAccountNumber}/{targetAccountNumber}/{balance}&quot;)
+    public Mono&lt;AccountEntity&gt; transferBalance(@PathVariable(&quot;sourceAccountNumber&quot;) String sourceAccountNumber,@PathVariable(&quot;targetAccountNumber&quot;) String targetAccountNumber,@PathVariable(&quot;balance&quot;) double balance){
+<span class="nc" id="L72">        return accountService.transferBalance(sourceAccountNumber,targetAccountNumber,balance);</span>
+    }
+    @PutMapping(value = &quot;/ApplyCommissionFee/{accountNumber}/{amount}&quot;)
+    public Mono&lt;AccountEntity&gt; applyCommissionFee(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;amount&quot;) double amount){
+<span class="nc" id="L76">        return accountService.applyCommissionFee(accountNumber,amount);</span>
+    }
+    @GetMapping(value = &quot;/CheckMinimumDailyBalance/{accountNumber}&quot;)
+    public Mono&lt;Boolean&gt; checkMinimumDailyBalance(@PathVariable(&quot;accountNumber&quot;) String accountNumber){
+<span class="nc" id="L80">        return accountService.checkMinimumDailyBalance(accountNumber);</span>
+    }
+    @GetMapping(value = &quot;/GetAverageBalance/{clientDocumentNumber}&quot;)
+    public Mono&lt;Double&gt; getAverageBalance(@PathVariable(&quot;clientDocumentNumber&quot;) String clientDocumentNumber){
+<span class="nc" id="L84">        return accountService.getAverageBalance(clientDocumentNumber);</span>
+    }
+    //New Method: Valida si la tarjeta de débito ingresada ya tiene una cuenta principal asociada (True = sí tiene, False = NO).
+    @GetMapping(value = &quot;/CheckDebitCardMainAccount/{debitCardNumber}&quot;)
+    public Mono&lt;Boolean&gt; checkDebitCardMainAccount(@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber){
+<span class="nc" id="L89">        return accountService.checkDebitCardMainAccount(debitCardNumber);</span>
+    }
+    //New Method: Asocia la cuenta ingresada a la tarjeta de débito ingresada.
+    // Le coloca debitCardMainAccount = true porque será cuenta principal asociada a la tarjeta.
+    @PutMapping(value = &quot;/LinkDebitCardMainAccount/{accountNumber}/{debitCardNumber}&quot;)
+    public Mono&lt;AccountEntity&gt; linkDebitCardMainAccount(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber){
+<span class="nc" id="L95">        return accountService.linkDebitCardMainAccount(accountNumber,debitCardNumber);</span>
+    }
+    //New Method: Asocia la cuenta ingresada a la tarjeta de débito ingresada.
+    // Le coloca debitCardMainAccount = false porque será una cuenta secundaria asociada a la tarjeta.
+    @PutMapping(value = &quot;/LinkDebitCardSecondaryAccount/{accountNumber}/{debitCardNumber}&quot;)
+    public Mono&lt;AccountEntity&gt; linkDebitCardSecondaryAccount(@PathVariable(&quot;accountNumber&quot;) String accountNumber,@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber){
+<span class="nc" id="L101">        return accountService.linkDebitCardSecondaryAccount(accountNumber,debitCardNumber);</span>
+    }
+    //New Method: Busca todas las cuentas asociadas al número de documento ingresado.
+    // Se valida también que no tengan ya una tarjeta de débito asociada o sean la cuenta principal de la tarjeta que se quiere asociar.
+    //Luego se asocia a todas las cuentas resultantes con la tarjeta de débito ingresada con debitCardMainAccount = false.
+
+    @PutMapping(value = &quot;/LinkDebitCardSecondaryAccounts/{clientDocumentNumber}/{debitCardNumber}&quot;)
+    public Flux&lt;AccountEntity&gt; linkDebitCardSecondaryAccounts(@PathVariable(&quot;clientDocumentNumber&quot;) String clientDocumentNumber,@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber){
+<span class="nc" id="L109">        return accountService.linkDebitCardSecondaryAccounts(clientDocumentNumber,debitCardNumber);</span>
+    }
+    //New Method: Trae el saldo (balance) de la cuenta principal asociada a la tarjeta de débito.
+    @GetMapping(value = &quot;/GetBalanceByDebitCard/{debitCardNumber}&quot;)
+    public Mono&lt;Double&gt; getBalanceByDebitCard(@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber){
+<span class="nc" id="L114">        return accountService.getBalanceByDebitCard(debitCardNumber);</span>
+    }
+    //New Method: Cuando se realiza alguna compra o pago con la tarjeta de débito, se llama al método con el número de la tarjeta y el monto consumido.
+    // El método luego trae todas las cuentas asociadas a la tarjeta de débito y filtra solo aquellas que tengan el saldo suficiente para realizar el pago.
+    // Luego las ordena por el campo debitCardPriorityOrder y trae el primer registro con Next().
+    //Se extrae el valor del monto de la compra/pago de la cuenta obtenida.
+    @PutMapping(value = &quot;/AddDebitCardPayment/{debitCardNumber}/{amount}&quot;)
+    public Mono&lt;AccountEntity&gt; addDebitCardPayment(@PathVariable(&quot;debitCardNumber&quot;) String debitCardNumber,@PathVariable(&quot;amount&quot;) double amount){
+<span class="nc" id="L122">        return accountService.addDebitCardPayment(debitCardNumber,amount);</span>
+    }
+    //New Method: Trae todas las cuentas asociadas a un cliente (a su número de documento).
+    //La idea es utilizar este método para obtener la data para el reporte completo y consolidado solicitado.
+    @GetMapping(value = &quot;/GetByClient/{clientDocumentNumber}&quot;)
+    public Flux&lt;AccountEntity&gt; getByClient(@PathVariable(&quot;clientDocumentNumber&quot;) String clientDocumentNumber){
+<span class="nc" id="L128">        return accountService.getByClient(clientDocumentNumber);</span>
+    }
+    //New Method: Trae todas las cuentas asociadas a un cliente (a su número de documento) creadas entre las fechas ingresadas.
+    //La idea es utilizar este método para obtener la data para el reporte completo y consolidado solicitado.
+    @GetMapping(value = &quot;/GetByClientAndDates/{clientDocumentNumber}/{initialDate}/{finalDate}&quot;)
+    public Flux&lt;AccountEntity&gt; getByClientAndDates(@PathVariable(&quot;clientDocumentNumber&quot;) String clientDocumentNumber,@PathVariable(&quot;initialDate&quot;) Date initialDate,@PathVariable(&quot;finalDate&quot;) Date finalDate){
+<span class="nc" id="L134">        return accountService.getByClientAndDates(clientDocumentNumber,initialDate,finalDate);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

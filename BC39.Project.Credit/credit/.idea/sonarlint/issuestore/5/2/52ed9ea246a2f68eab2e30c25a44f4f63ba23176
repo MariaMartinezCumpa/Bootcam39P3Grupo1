@@ -1,0 +1,13 @@
+
+~
+java:S1192"bDefine a constant instead of duplicating this literal "The client does not have a credit" 4 times.(»ŠØ«ıÿÿÿÿ
+l
+java:S1192,"QDefine a constant instead of duplicating this literal "Credit not found" 5 times.(¦ç‹üÿÿÿÿ
+d
+java:S3008"NRename this field "Log" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(û÷–Á
+i
+java:S16023"SRemove useless curly braces around statement and then remove useless return keyword(ÌöÕª
+_
+java:S1612J"IReplace this lambda with method reference 'CreditEntity::getCurrentDebt'.(À¦éÍ
+=
+java:S1068"'Remove this unused "Log" private field.(û÷–Á
